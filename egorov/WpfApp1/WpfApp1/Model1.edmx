@@ -1,0 +1,313 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="user260_dbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="3110ДанныеОПрограммах">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Наименование" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Количество" Type="int" Nullable="false" />
+          <Property Name="ДатаВыпуска" Type="date" Nullable="false" />
+          <Property Name="ДатаПоступленияНаФирму" Type="date" Nullable="false" />
+          <Property Name="ФирмаПроизводитель" Type="int" Nullable="false" />
+          <Property Name="Цена" Type="int" Nullable="false" />
+          <Property Name="Клиентid" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="3110Клиенты">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="НазваниеФирмы" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ЮридическийАдрес" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Телефон" Type="int" Nullable="false" />
+          <Property Name="НомерСчета" Type="int" Nullable="false" />
+          <Property Name="login" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="3110Поставщики">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="НазваниеФирмы" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ЮридическийАдрес" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Телефон" Type="int" Nullable="false" />
+          <Property Name="НомерСчета" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="3110Сотрудники">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Фамилия" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Имя" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Отчество" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ПаспортныеДанные" Type="int" Nullable="false" />
+          <Property Name="ДатаПриемаНаРаботу" Type="date" Nullable="false" />
+          <Property Name="Квалификация" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Должность" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Образование" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="login" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_3110ДанныеОПрограммах_3110Клиенты">
+          <End Role="3110Клиенты" Type="Self.3110Клиенты" Multiplicity="1" />
+          <End Role="3110ДанныеОПрограммах" Type="Self.3110ДанныеОПрограммах" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="3110Клиенты">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="3110ДанныеОПрограммах">
+              <PropertyRef Name="Клиентid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_3110ДанныеОПрограммах_3110Поставщики">
+          <End Role="3110Поставщики" Type="Self.3110Поставщики" Multiplicity="1" />
+          <End Role="3110ДанныеОПрограммах" Type="Self.3110ДанныеОПрограммах" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="3110Поставщики">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="3110ДанныеОПрограммах">
+              <PropertyRef Name="ФирмаПроизводитель" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_3110Сотрудники_3110Клиенты">
+          <End Role="3110Клиенты" Type="Self.3110Клиенты" Multiplicity="1" />
+          <End Role="3110Сотрудники" Type="Self.3110Сотрудники" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="3110Клиенты">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="3110Сотрудники">
+              <PropertyRef Name="id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="user260_dbModelStoreContainer">
+          <EntitySet Name="3110ДанныеОПрограммах" EntityType="Self.3110ДанныеОПрограммах" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="3110Клиенты" EntityType="Self.3110Клиенты" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="3110Поставщики" EntityType="Self.3110Поставщики" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="3110Сотрудники" EntityType="Self.3110Сотрудники" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_3110ДанныеОПрограммах_3110Клиенты" Association="Self.FK_3110ДанныеОПрограммах_3110Клиенты">
+            <End Role="3110Клиенты" EntitySet="3110Клиенты" />
+            <End Role="3110ДанныеОПрограммах" EntitySet="3110ДанныеОПрограммах" />
+          </AssociationSet>
+          <AssociationSet Name="FK_3110ДанныеОПрограммах_3110Поставщики" Association="Self.FK_3110ДанныеОПрограммах_3110Поставщики">
+            <End Role="3110Поставщики" EntitySet="3110Поставщики" />
+            <End Role="3110ДанныеОПрограммах" EntitySet="3110ДанныеОПрограммах" />
+          </AssociationSet>
+          <AssociationSet Name="FK_3110Сотрудники_3110Клиенты" Association="Self.FK_3110Сотрудники_3110Клиенты">
+            <End Role="3110Клиенты" EntitySet="3110Клиенты" />
+            <End Role="3110Сотрудники" EntitySet="3110Сотрудники" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="user260_dbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="C3110ДанныеОПрограммах">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Наименование" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Количество" Type="Int32" Nullable="false" />
+          <Property Name="ДатаВыпуска" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ДатаПоступленияНаФирму" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ФирмаПроизводитель" Type="Int32" Nullable="false" />
+          <Property Name="Цена" Type="Int32" Nullable="false" />
+          <Property Name="Клиентid" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="C3110Клиенты" Relationship="Self.FK_3110ДанныеОПрограммах_3110Клиенты" FromRole="C3110ДанныеОПрограммах" ToRole="C3110Клиенты" />
+          <NavigationProperty Name="C3110Поставщики" Relationship="Self.FK_3110ДанныеОПрограммах_3110Поставщики" FromRole="C3110ДанныеОПрограммах" ToRole="C3110Поставщики" />
+        </EntityType>
+        <EntityType Name="C3110Клиенты">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="НазваниеФирмы" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ЮридическийАдрес" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Телефон" Type="Int32" Nullable="false" />
+          <Property Name="НомерСчета" Type="Int32" Nullable="false" />
+          <Property Name="login" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="C3110ДанныеОПрограммах" Relationship="Self.FK_3110ДанныеОПрограммах_3110Клиенты" FromRole="C3110Клиенты" ToRole="C3110ДанныеОПрограммах" />
+          <NavigationProperty Name="C3110Сотрудники" Relationship="Self.FK_3110Сотрудники_3110Клиенты" FromRole="C3110Клиенты" ToRole="C3110Сотрудники" />
+        </EntityType>
+        <EntityType Name="C3110Поставщики">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="НазваниеФирмы" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ЮридическийАдрес" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Телефон" Type="Int32" Nullable="false" />
+          <Property Name="НомерСчета" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="C3110ДанныеОПрограммах" Relationship="Self.FK_3110ДанныеОПрограммах_3110Поставщики" FromRole="C3110Поставщики" ToRole="C3110ДанныеОПрограммах" />
+        </EntityType>
+        <EntityType Name="C3110Сотрудники">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Фамилия" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Имя" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Отчество" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ПаспортныеДанные" Type="Int32" Nullable="false" />
+          <Property Name="ДатаПриемаНаРаботу" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Квалификация" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Должность" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Образование" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="login" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="C3110Клиенты" Relationship="Self.FK_3110Сотрудники_3110Клиенты" FromRole="C3110Сотрудники" ToRole="C3110Клиенты" />
+        </EntityType>
+        <Association Name="FK_3110ДанныеОПрограммах_3110Клиенты">
+          <End Role="C3110Клиенты" Type="Self.C3110Клиенты" Multiplicity="1" />
+          <End Role="C3110ДанныеОПрограммах" Type="Self.C3110ДанныеОПрограммах" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="C3110Клиенты">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="C3110ДанныеОПрограммах">
+              <PropertyRef Name="Клиентid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_3110ДанныеОПрограммах_3110Поставщики">
+          <End Role="C3110Поставщики" Type="Self.C3110Поставщики" Multiplicity="1" />
+          <End Role="C3110ДанныеОПрограммах" Type="Self.C3110ДанныеОПрограммах" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="C3110Поставщики">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="C3110ДанныеОПрограммах">
+              <PropertyRef Name="ФирмаПроизводитель" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_3110Сотрудники_3110Клиенты">
+          <End Role="C3110Клиенты" Type="Self.C3110Клиенты" Multiplicity="1" />
+          <End Role="C3110Сотрудники" Type="Self.C3110Сотрудники" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="C3110Клиенты">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="C3110Сотрудники">
+              <PropertyRef Name="id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="user260_dbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="C3110ДанныеОПрограммах" EntityType="Self.C3110ДанныеОПрограммах" />
+          <EntitySet Name="C3110Клиенты" EntityType="Self.C3110Клиенты" />
+          <EntitySet Name="C3110Поставщики" EntityType="Self.C3110Поставщики" />
+          <EntitySet Name="C3110Сотрудники" EntityType="Self.C3110Сотрудники" />
+          <AssociationSet Name="FK_3110ДанныеОПрограммах_3110Клиенты" Association="Self.FK_3110ДанныеОПрограммах_3110Клиенты">
+            <End Role="C3110Клиенты" EntitySet="C3110Клиенты" />
+            <End Role="C3110ДанныеОПрограммах" EntitySet="C3110ДанныеОПрограммах" />
+          </AssociationSet>
+          <AssociationSet Name="FK_3110ДанныеОПрограммах_3110Поставщики" Association="Self.FK_3110ДанныеОПрограммах_3110Поставщики">
+            <End Role="C3110Поставщики" EntitySet="C3110Поставщики" />
+            <End Role="C3110ДанныеОПрограммах" EntitySet="C3110ДанныеОПрограммах" />
+          </AssociationSet>
+          <AssociationSet Name="FK_3110Сотрудники_3110Клиенты" Association="Self.FK_3110Сотрудники_3110Клиенты">
+            <End Role="C3110Клиенты" EntitySet="C3110Клиенты" />
+            <End Role="C3110Сотрудники" EntitySet="C3110Сотрудники" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="user260_dbModelStoreContainer" CdmEntityContainer="user260_dbEntities">
+          <EntitySetMapping Name="C3110ДанныеОПрограммах">
+            <EntityTypeMapping TypeName="user260_dbModel.C3110ДанныеОПрограммах">
+              <MappingFragment StoreEntitySet="3110ДанныеОПрограммах">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Наименование" ColumnName="Наименование" />
+                <ScalarProperty Name="Количество" ColumnName="Количество" />
+                <ScalarProperty Name="ДатаВыпуска" ColumnName="ДатаВыпуска" />
+                <ScalarProperty Name="ДатаПоступленияНаФирму" ColumnName="ДатаПоступленияНаФирму" />
+                <ScalarProperty Name="ФирмаПроизводитель" ColumnName="ФирмаПроизводитель" />
+                <ScalarProperty Name="Цена" ColumnName="Цена" />
+                <ScalarProperty Name="Клиентid" ColumnName="Клиентid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="C3110Клиенты">
+            <EntityTypeMapping TypeName="user260_dbModel.C3110Клиенты">
+              <MappingFragment StoreEntitySet="3110Клиенты">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="НазваниеФирмы" ColumnName="НазваниеФирмы" />
+                <ScalarProperty Name="ЮридическийАдрес" ColumnName="ЮридическийАдрес" />
+                <ScalarProperty Name="Телефон" ColumnName="Телефон" />
+                <ScalarProperty Name="НомерСчета" ColumnName="НомерСчета" />
+                <ScalarProperty Name="login" ColumnName="login" />
+                <ScalarProperty Name="password" ColumnName="password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="C3110Поставщики">
+            <EntityTypeMapping TypeName="user260_dbModel.C3110Поставщики">
+              <MappingFragment StoreEntitySet="3110Поставщики">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="НазваниеФирмы" ColumnName="НазваниеФирмы" />
+                <ScalarProperty Name="ЮридическийАдрес" ColumnName="ЮридическийАдрес" />
+                <ScalarProperty Name="Телефон" ColumnName="Телефон" />
+                <ScalarProperty Name="НомерСчета" ColumnName="НомерСчета" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="C3110Сотрудники">
+            <EntityTypeMapping TypeName="user260_dbModel.C3110Сотрудники">
+              <MappingFragment StoreEntitySet="3110Сотрудники">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Фамилия" ColumnName="Фамилия" />
+                <ScalarProperty Name="Имя" ColumnName="Имя" />
+                <ScalarProperty Name="Отчество" ColumnName="Отчество" />
+                <ScalarProperty Name="ПаспортныеДанные" ColumnName="ПаспортныеДанные" />
+                <ScalarProperty Name="ДатаПриемаНаРаботу" ColumnName="ДатаПриемаНаРаботу" />
+                <ScalarProperty Name="Квалификация" ColumnName="Квалификация" />
+                <ScalarProperty Name="Должность" ColumnName="Должность" />
+                <ScalarProperty Name="Образование" ColumnName="Образование" />
+                <ScalarProperty Name="login" ColumnName="login" />
+                <ScalarProperty Name="password" ColumnName="password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
